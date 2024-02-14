@@ -90,7 +90,6 @@ const Projects = ({handleCancel, handleDelete, ...props}) => {
   }, [isEditing])
 
   const handleRemove = (title) => {
-    console.log(title)
     const newData = data.list.filter((item) => item.title !== title)
     setData(prevState => ({
         ...prevState,
@@ -169,7 +168,7 @@ const Projects = ({handleCancel, handleDelete, ...props}) => {
                                 data={{
                                     title: "Add",
                                     type: "button",
-                                    handleClick: handleSave,
+                                    handleClick: !isAddDisabled ? handleSave : null,
                                 }}
                             />
                         </div>

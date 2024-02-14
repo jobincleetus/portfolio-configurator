@@ -105,7 +105,6 @@ const Skillsets = ({handleCancel, handleDelete, ...props}) => {
   }, [isEditing])
 
   const handleRemove = (title) => {
-    console.log(title)
     const newData = data.filter((item) => item.title !== title)
     setData(newData)
   }
@@ -182,7 +181,7 @@ const Skillsets = ({handleCancel, handleDelete, ...props}) => {
                             data={{
                                 title: "Add",
                                 type: "button",
-                                handleClick: !isAddDisabled && handleSave,
+                                handleClick: !isAddDisabled ? handleSave : null,
                             }}
                         />
                     </div>

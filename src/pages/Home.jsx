@@ -10,15 +10,20 @@ import { useState } from "react";
 function Home() {
   const primaryData = useSelector((state) => state.library.primaryContent);
   const components = useSelector((state) => state.library.componentOrder);
+  const content = useSelector((state) => state.library.content);
 
   const stickyBar = useRef();
 
   const [hasPrimaryData, setHasPrimaryData] = useState(0)
 
+  const [hasExperience, setHasExperience] = useState(false)
+  const [experienceData, setExperienceData] = useState({})
+
   useEffect(() => {
     if(primaryData.title && primaryData.description) {
         setHasPrimaryData(true)
     }
+    setHasExperience(components.some(str => str.includes('Experience')))
     setTimeout(() => {
         window.scrollTo({
             behavior: "smooth",
@@ -26,6 +31,15 @@ function Home() {
         });
     }, 50)
   }, [])
+
+  useEffect(() => {
+    if(hasExperience) {
+        const existingData = content.find((r) => r.name === 'Experience')
+        if(existingData.value) {
+            setExperienceData(existingData.value)
+        }
+    }
+  }, [hasExperience])
 
   return (
     <div className="container mx-auto">
@@ -48,6 +62,18 @@ function Home() {
                                         {primaryData.email}
                                     </p>
                                 </div>
+                                {
+                                    hasExperience && experienceData && experienceData.list && experienceData.list.length > 0 &&
+                                    <div>
+                                    <p className="mb-2 text-sm text-gray-400">Currently</p>
+                                    <div className="flex gap-5 items-center">
+                                        <img src={experienceData.list[0].image ? experienceData.list[0].image : imgPlaceHolder} className={'w-10 h-10 rounded-lg object-cover overflow-hidden'} />
+                                        <p>
+                                            {experienceData.list[0].title}
+                                        </p>
+                                    </div>
+                                    </div>
+                                }
                             </div>
                             <div className="col-span-12 lg:col-span-8 col-start-1 lg:col-start-5 flex flex-col justify-center">
                                 <div className="editor-inputHead text-3xl lg:text-7xl" dangerouslySetInnerHTML={{ __html: primaryData.title }}>

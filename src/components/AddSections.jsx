@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import plusIcon from '../assets/imgs/plus.svg'
-import { setComponentOrder, setContent } from "../store/library";
+import { setComponentOrder, setContent, toggleIsContentBeingEdited } from "../store/library";
 import ComponentLoop from "./ComponentLoop";
 
 const AddSections = () => {
@@ -39,6 +39,7 @@ const AddSections = () => {
   const handleCancel = (canceledItem) => {
     const updatedList = componentList.filter(item => item !== canceledItem);
     setComponentList(updatedList);
+    dispatch(toggleIsContentBeingEdited(false))
   }
 
   const handleDelete = (deletedItem) => {
