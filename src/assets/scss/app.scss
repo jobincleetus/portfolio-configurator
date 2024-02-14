@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import './colors.scss';
+
+body {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    color: $primary;
+    background-color: $grey;
+    margin: 0;
+}
+
+html, body, #root {
+    height: 100%;
+}
+.editor-inputHead {
+    resize: none;
+    caret-color: $primary;
+    position: relative;
+    tab-size: 1;
+    outline: 0;
+    padding: 15px 0px;
+    caret-color: $primary;
+}
+  
+.editor-placeholderHead {
+    color: rgba($color: $primary, $alpha: 0.6);
+    overflow: hidden;
+    position: absolute;
+    text-overflow: ellipsis;
+    top: 15px;
+    left: 10px;
+    @media only screen and (max-width: 769px) {
+     left: 0;   
+    }
+    user-select: none;
+    display: inline-block;
+    pointer-events: none;
+    white-space: nowrap;
+    width: -webkit-fill-available;
+}
+input {
+    background-color: transparent;
+    &:focus {
+        outline: none;
+    }
+}
+
+.fullScreen {
+    min-height: calc(100vh - 56px);
+}
+
+.drag-icon {
+    cursor: move;
+    cursor: -webkit-grabbing;
+    cursor:    -moz-grabbing;
+    cursor:         grabbing;
+}
+
+@media only screen and (max-width: 1000px) {
+    .container {
+        padding-left: 30px;
+        padding-right: 30px;
+        .container {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+}
