@@ -5,8 +5,9 @@ import { BrowserRouter, createBrowserRouter, Route, Router, RouterProvider, Rout
 import Home from './pages/Home.jsx';
 import Header from './components/Header.jsx';
 import Edit from './pages/Edit.jsx';
-import { store } from './store/index';
+import { persistor, store } from './store/index';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const router = createBrowserRouter([
   {
@@ -21,12 +22,14 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
-    <BrowserRouter>
-      <Header />
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route exact path="edit" element={<Edit />} />
-      </Routes>
-    </BrowserRouter>
+    <PersistGate loading={null} persistor={persistor}>
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="edit" element={<Edit />} />
+        </Routes>
+      </BrowserRouter>
+    </PersistGate>
   </Provider>,
 )
