@@ -43,9 +43,9 @@ function Home() {
 
   return (
     <div className="container mx-auto">
-        <div className={`flex flex-col gap-10 h-full py-10 fullScreen ${hasPrimaryData || (components && components.length > 0) ? 'justify-between ' : 'justify-center'}`}>
+        <div className={`flex flex-col gap-10 h-full py-10 fullScreen ${hasPrimaryData ? 'justify-between ' : 'justify-center'}`}>
         {
-            primaryData && hasPrimaryData || (components && components.length > 0) ?
+            primaryData && hasPrimaryData ?
             <>
                 <PreviewNavigator />
                 <div className="grid grid-cols-12 gap-0 gap-y-10 lg:gap-20">

@@ -149,7 +149,16 @@ const Skillsets = ({handleCancel, handleDelete, ...props}) => {
                 addCardOpen ? 
                 <div className='rounded-2xl relative min-h-[250px] px-8 py-6 flex flex-col justify-between bg-white border'>
                     <div>
-                        <button className='absolute top-4 right-4' onClick={() => (setAddCardOpen(false), setCurrentCard({}), setCurrentPoint(''))}>
+                        <button className='absolute top-4 right-4' onClick={() => 
+                            {
+                                setAddCardOpen(false); 
+                                setCurrentCard({}); 
+                                setCurrentPoint('');
+                                if(data.length > 0) {
+                                    setIsDisabled(false)
+                                }
+                            }
+                        }>
                             <AiOutlineCloseCircle size={20} />
                         </button>
                         <input type="text" placeholder='Untitled' className='w-full text-xl font-bold mb-2' onChange={(text) => handleCurrentCardChange('title', text.target.value)} />

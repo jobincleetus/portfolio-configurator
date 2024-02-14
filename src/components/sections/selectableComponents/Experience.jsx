@@ -124,7 +124,11 @@ const Experience = ({handleCancel, handleDelete, ...props}) => {
             <div className='grid gap-8'>
                 {
                     data.list && data.list.length > 0 && data.list.map((card, i) => (
-                        <div key={`card_${i}`} className='relative rounded-2xl px-8 py-6 flex flex-col justify-between bg-white border'>
+                        <div key={`card_${i}`} 
+                        className={`
+                            relative rounded-2xl px-8 py-6 flex flex-col justify-between bg-white border 
+                            ${location.pathname !== '/edit' && i == 0 ? 'shadow-lg' : ''}
+                        `}>
                             {isEditing &&
                                 <button className='absolute top-4 right-4' onClick={(() => handleRemove(card.title))}>
                                     <AiOutlineCloseCircle size={20} />
@@ -156,7 +160,15 @@ const Experience = ({handleCancel, handleDelete, ...props}) => {
                     addCardOpen ? 
                     <div className='relative rounded-2xl px-8 py-6 flex flex-col justify-between bg-white border'>
                         <div>
-                            <button className='absolute top-4 right-4' onClick={() => (setAddCardOpen(false), setCurrentCard({}))}>
+                            <button className='absolute top-4 right-4' onClick={() => 
+                                {
+                                    setAddCardOpen(false);
+                                    setCurrentCard({})
+                                    if(data.list.length > 0 && data.description) {
+                                        setIsDisabled(false)
+                                    }
+                                }
+                            }>
                                 <AiOutlineCloseCircle size={20} />
                             </button>
                             <div className='flex flex-col lg:flex-row gap-4 items-start lg:items-center mb-6'>

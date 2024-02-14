@@ -134,7 +134,7 @@ const Blogs = ({handleCancel, handleDelete, ...props}) => {
                                 <img src={card.image ? card.image : imgPlaceHolder} className={'w-10 h-10 mb-3 rounded-lg object-cover overflow-hidden'} />
                                 <p className='w-full mb-2 text-black'>{card.title}</p>
                                 <div className='flex gap-2 items-center mb-3'>
-                                    <p className='w-full text-sm placeholder-grey-400'>{card.link}</p>
+                                    <p className='w-full text-sm text-gray-400'>{card.link}</p>
                                 </div>
                             </div>
                         </div>
@@ -144,7 +144,15 @@ const Blogs = ({handleCancel, handleDelete, ...props}) => {
                     addCardOpen ? 
                     <div className='relative rounded-2xl px-8 py-6 flex flex-col justify-between bg-white border'>
                         <div>
-                            <button className='absolute top-4 right-4' onClick={() => (setAddCardOpen(false), setCurrentCard({}))}>
+                            <button className='absolute top-4 right-4' onClick={() => 
+                                {   
+                                    setAddCardOpen(false);
+                                    setCurrentCard({});
+                                    if(data.list.length > 0 && data.description) {
+                                        setIsDisabled(false)
+                                    }
+                                }
+                            }>
                                 <AiOutlineCloseCircle size={20} />
                             </button>
                             <ImageUploader
